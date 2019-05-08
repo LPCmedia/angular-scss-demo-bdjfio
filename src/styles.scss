@@ -16,7 +16,7 @@
 // defined in @angular/material
 // TODO https://www.sitepoint.com/extra-map-functions-sass/
 
-@mixin angular-material-adapter {
+// @mixin angular-material-adapter {
   $mat-dark-theme-background: (
 
     status-bar: black,
@@ -26,7 +26,7 @@
     background: map_get($backgrounds, background-main),
     // TODO adjust theme api to have a variant for hover
     hover:      var(--component-selection-surface-variant), // or hightlight ? or what ?
-    card:       map_get($mat-grey, 800),
+    card:       var(--component-background),
     dialog:     map_get($mat-grey, 800),
     disabled-button: rgba(white, 0.12),
     raised-button: map-get($mat-grey, 800),
@@ -110,7 +110,7 @@
   $custom-theme: mat-dark-theme($custom-theme-primary, $custom-theme-accent, $custom-theme-warn);
 
   // shows that the vars rule not material
-  $custom-theme: mat-light-theme($custom-theme-primary, $custom-theme-accent, $custom-theme-warn);
+  // $custom-theme: mat-light-theme($custom-theme-primary, $custom-theme-accent, $custom-theme-warn);
 
   // TODO remove this and use mixins for components that we use only
   @include angular-material-theme($custom-theme);
@@ -119,4 +119,6 @@
   @include mat-datepicker-theme($custom-theme);
 
 
-}
+// }
+
+// @include angular-material-adapter();
