@@ -43,16 +43,16 @@ $mat-dark-theme-background: (
 // should the base vary
 
 $mat-dark-theme-foreground: (
-  base:              map_get($backgrounds, background-on),
-  divider:           map_get($backgrounds, background-on),
-  dividers:          map_get($backgrounds, background-on),
+  base:              var(--component-on),
+  divider:           var(--component-border),
+  dividers:          var(--component-border),
   disabled:          map_get($backgrounds, background-on),
   disabled-button:   map_get($backgrounds, background-on),
   disabled-text:     map_get($backgrounds, background-on),
   elevation:         map_get($backgrounds, background-on),
   hint-text:         var(--component-on),
   secondary-text:    var(--component-on),
-  icon:              var(--component-on),
+  icon:              var(--component-on, #fff),
   icons:             map_get($backgrounds, background-on),
   text:              var(--component-on),
   slider-min:        map_get($backgrounds, background-on),
