@@ -4,8 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDatepickerModule } from '@angular/material';
 import { AppComponent } from './app.component';
-import { HelloComponent } from './hello.component';
-import { NewComponent } from './new/new.component';
 import { MatNativeDateModule } from '@angular/material/'
 
 @NgModule({

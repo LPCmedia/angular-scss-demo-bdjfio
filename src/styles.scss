@@ -110,10 +110,13 @@ $custom-theme: mat-dark-theme($custom-theme-primary, $custom-theme-accent, $cust
 
 
 // shows that the vars rule not material
-$custom-theme: mat-light-theme($custom-theme-primary, $custom-theme-accent, $custom-theme-warn);
+// $custom-theme: mat-light-theme($custom-theme-primary, $custom-theme-accent, $custom-theme-warn);
 
 
 // this goes in the components scss
 // todo make this component specific
-@include angular-material-theme($custom-theme);
-// @include mat-datepicker-theme($custom-theme);
+// @include angular-material-theme($custom-theme);
+@include mat-core-theme($custom-theme);
+@include mat-datepicker-theme($custom-theme);
+@include mat-button-theme($custom-theme);
+@include mat-icon-theme($custom-theme);
