@@ -16,109 +16,102 @@
 // defined in @angular/material
 // TODO https://www.sitepoint.com/extra-map-functions-sass/
 
-// @mixin angular-material-adapter {
-  $mat-dark-theme-background: (
+$mat-dark-theme-background: (
 
-    status-bar: black,
+  status-bar: black,
 
-    // this comes from out light themes
-    app-bar:    map_get($backgrounds, background-topnav),
-    background: map_get($backgrounds, background-main),
-    // TODO adjust theme api to have a variant for hover
-    hover:      var(--component-selection-surface-variant), // or hightlight ? or what ?
-    card:       map_get($backgrounds, background-topnav), //var(--component-background),
-    dialog:     map_get($mat-grey, 800),
-    disabled-button: rgba(white, 0.12),
-    raised-button: map-get($mat-grey, 800),
-    focused-button: $light-focused,
-    selected-button: map_get($mat-grey, 900),
-    selected-disabled-button: map_get($mat-grey, 800),
-    disabled-button-toggle: black,
-    unselected-chip: map_get($mat-grey, 700),
-    disabled-list-option: black,
-  );
+  // this comes from out light themes
+  app-bar:    map_get($backgrounds, background-topnav),
+  background: var(--component-background),
+  // TODO adjust theme api to have a variant for hover
+  hover:      var(--component-selection-surface-variant), // or hightlight ? or what ?
+  card:       var(--component-background, hotpink), //
+  dialog:     map_get($mat-grey, 800),
+  disabled-button: rgba(white, 0.12),
+  raised-button: map-get($mat-grey, 800),
+  focused-button: $light-focused,
+  selected-button: map_get($mat-grey, 900),
+  selected-disabled-button: map_get($mat-grey, 800),
+  disabled-button-toggle: black,
+  unselected-chip: map_get($mat-grey, 700),
+  disabled-list-option: black,
+);
 
-  // TODO map-extend what we need
-  // https://getbaseweb.com/blog/2017/03/07/overriding-variable-maps-with-sass/
-  // TODO discuss how to wire up the palette to the vars. since all foregrounds are white.
-  // should the base vary
+// TODO map-extend what we need
+// https://getbaseweb.com/blog/2017/03/07/overriding-variable-maps-with-sass/
+// TODO discuss how to wire up the palette to the vars. since all foregrounds are white.
+// should the base vary
 
-  $mat-dark-theme-foreground: (
-    base:              map_get($backgrounds, background-on),
-    divider:           map_get($backgrounds, background-on),
-    dividers:          map_get($backgrounds, background-on),
-    disabled:          map_get($backgrounds, background-on),
-    disabled-button:   map_get($backgrounds, background-on),
-    disabled-text:     map_get($backgrounds, background-on),
-    elevation:         map_get($backgrounds, background-on),
-    hint-text:         map_get($backgrounds, background-on),
-    secondary-text:    map_get($backgrounds, background-on), 
-    icon:              map_get($backgrounds, background-on),
-    icons:             map_get($backgrounds, background-on),
-    text:              map_get($backgrounds, background-on),
-    slider-min:        map_get($backgrounds, background-on),
-    slider-off:        map_get($backgrounds, background-on),
-    slider-off-active: map_get($backgrounds, background-on),
-  );
+$mat-dark-theme-foreground: (
+  base:              map_get($backgrounds, background-on),
+  divider:           map_get($backgrounds, background-on),
+  dividers:          map_get($backgrounds, background-on),
+  disabled:          map_get($backgrounds, background-on),
+  disabled-button:   map_get($backgrounds, background-on),
+  disabled-text:     map_get($backgrounds, background-on),
+  elevation:         map_get($backgrounds, background-on),
+  hint-text:         map_get($backgrounds, background-on),
+  secondary-text:    map_get($backgrounds, background-on), 
+  icon:              map_get($backgrounds, background-on),
+  icons:             map_get($backgrounds, background-on),
+  text:              map_get($backgrounds, background-on),
+  slider-min:        map_get($backgrounds, background-on),
+  slider-off:        map_get($backgrounds, background-on),
+  slider-off-active: map_get($backgrounds, background-on),
+);
 
-  // wire up light theme.
-  // we don't care here cuz css variables rule our themes
-  // probably won't need to do this
-  $mat-light-theme-foreground: $mat-dark-theme-foreground;
-  $mat-light-theme-background: $mat-dark-theme-background;
+// wire up light theme.
+// we don't care here cuz css variables rule our themes
+// probably won't need to do this
+$mat-light-theme-foreground: $mat-dark-theme-foreground;
+$mat-light-theme-background: $mat-dark-theme-background;
 
-  // TODO wire up primary, secondary and "warn"
-  $avn-mat-theme-primary: (
-    50: #ffebee,
-    100: #ffcdd2,
-    200: #ef9a9a,
-    300: #e57373,
-    400: #ef5350,
-    500: #f44336,
-    600: #e53935,
-    700: #d32f2f,
-    800: #c62828,
-    900: #b71c1c,
-    A100: #ff8a80,
-    A200: #ff5252,
-    A400: #ff1744,
-    A700: #d50000,
-    contrast: (
-      50: $dark-primary-text,
-      100: $dark-primary-text,
-      200: $dark-primary-text,
-      300: $dark-primary-text,
-      400: $dark-primary-text,
-      500: hotpink,
-      600: hotpink,
-      700: hotpink,
-      800: $light-primary-text,
-      900: $light-primary-text,
-      A100: $dark-primary-text,
-      A200: $light-primary-text,
-      A400: $light-primary-text,
-      A700: $light-primary-text,
-    )
-  );
-
+// TODO wire up primary, secondary and "warn"
+$avn-mat-theme-primary: (
+  50: #ffebee,
+  100: #ffcdd2,
+  200: #ef9a9a,
+  300: #e57373,
+  400: #ef5350,
+  500: #f44336,
+  600: #e53935,
+  700: #d32f2f,
+  800: #c62828,
+  900: #b71c1c,
+  A100: #ff8a80,
+  A200: #ff5252,
+  A400: #ff1744,
+  A700: #d50000,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: hotpink,
+    600: hotpink,
+    700: hotpink,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  )
+);
 
 
-  $custom-theme-primary: mat-palette($avn-mat-theme-primary);
-  $custom-theme-accent: mat-palette($avn-mat-theme-primary);
-  $custom-theme-warn: mat-palette($mat-red);
 
-  $custom-theme: mat-dark-theme($custom-theme-primary, $custom-theme-accent, $custom-theme-warn);
+$custom-theme-primary: mat-palette($avn-mat-theme-primary);
+$custom-theme-accent: mat-palette($avn-mat-theme-primary);
+$custom-theme-warn: mat-palette($mat-red);
 
-  // shows that the vars rule not material
-  // $custom-theme: mat-light-theme($custom-theme-primary, $custom-theme-accent, $custom-theme-warn);
+$custom-theme: mat-dark-theme($custom-theme-primary, $custom-theme-accent, $custom-theme-warn);
 
-  // TODO remove this and use mixins for components that we use only
-  @include angular-material-theme($custom-theme);
-
-  // this goes in the components scss
-  @include mat-datepicker-theme($custom-theme);
+// shows that the vars rule not material
+// $custom-theme: mat-light-theme($custom-theme-primary, $custom-theme-accent, $custom-theme-warn);
 
 
-// }
-
-// @include angular-material-adapter();
+// this goes in the components scss
+@include mat-button-theme($custom-theme);
+@include mat-datepicker-theme($custom-theme);
