@@ -108,6 +108,8 @@ $custom-theme-warn: mat-palette($mat-red);
 
 $custom-theme: mat-dark-theme($custom-theme-primary, $custom-theme-accent, $custom-theme-warn);
 
+$custom-theme: map-extend(map-get($custom-theme, 'background', $mat-dark-theme-background, true));
+
 // shows that the vars rule not material
 // $custom-theme: mat-light-theme($custom-theme-primary, $custom-theme-accent, $custom-theme-warn);
 
