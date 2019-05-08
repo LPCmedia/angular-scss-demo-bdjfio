@@ -26,7 +26,7 @@
     background: map_get($backgrounds, background-main),
     // TODO adjust theme api to have a variant for hover
     hover:      var(--component-selection-surface-variant), // or hightlight ? or what ?
-    card:       var(--component-background),
+    card:       map_get($backgrounds, background-topnav), //var(--component-background),
     dialog:     map_get($mat-grey, 800),
     disabled-button: rgba(white, 0.12),
     raised-button: map-get($mat-grey, 800),
