@@ -116,4 +116,4 @@ $custom-theme: mat-light-theme($custom-theme-primary, $custom-theme-accent, $cus
 // this goes in the components scss
 
 @include angular-material-theme($custom-theme);
-@include mat-datepicker-theme($custom-theme);
+// @include mat-datepicker-theme($custom-theme);
