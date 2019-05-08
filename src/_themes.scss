@@ -1,0 +1,575 @@
+
+// used for theme input
+$themes: (
+  primary: (
+    base: var(--primary-base),
+    variant: var(--primary-variant),
+    on: var(--primary-on)
+  ),
+  secondary: (
+    base: var(--secondary-base),
+    variant: var(--secondary-variant),
+    on: var(--secondary-on),
+  ),
+  highlight: (
+    base: var(--highlight-base),
+    variant: var(--highlight-variant),
+    on: var(--highlight-on),
+  ),
+  gris: (
+    base: var(--grey-base),
+    variant: var(--grey-variant),
+    on: var(--grey-on),
+  ),
+  danger: (
+    base: var(--danger-base),
+    variant: var(--danger-variant),
+    on: var(--danger-on),
+  ),
+  warning: (
+    base: var(--warning-base),
+    variant: var(--warning-variant),
+    on: var(--warning-on),
+  ),
+  info: (
+    base: var(--info-base),
+    variant: var(--info-variant),
+    on: var(--info-on),
+  ),
+  success: (
+    base: var(--success-base),
+    variant: var(--success-variant),
+    on: var(--success-on),
+  )
+);
+
+// used for backrounds on layout components
+$backgrounds: (
+  background-on: var(--background-on),
+  background-main: var(--background-main),
+  background-sidenav: var(--background-sidenav),
+  background-sidenav-on: var(--background-sidenav-on),
+  background-topnav: var(--background-topnav),
+  background-topnav-on: var(--background-topnav-on),
+  background-ribbon: var(--background-ribbon),
+  background-ribbon-variant: var(--background-ribbon-variant),
+  background-ribbon-on: var(--background-ribbon-on),
+  background-variant: var(--background-variant),
+  background: var(--background),
+  background-50: var(--background-50),
+  background-50-on: var(--background-50-on),
+  background-100: var(--background-100),
+  background-100-on: var(--background-100-on),
+  background-200: var(--background-200),
+  background-200-on: var(--background-200-on),
+  background-300: var(--background-300),
+  background-300-on: var(--background-300-on),
+  background-400: var(--background-400),
+  background-400-on: var(--background-400-on),
+  background-500: var(--background-500),
+  background-500-on: var(--background-500-on),
+  background-600: var(--background-600),
+  background-600-on: var(--background-600-on),
+  background-700: var(--background-700),
+  background-700-on: var(--background-700-on),
+  background-800: var(--background-800),
+  background-800-on: var(--background-800-on),
+  background-900: var(--background-900),
+  background-900-on: var(--background-900-on),
+);
+
+// the fall back for older browsers
+$backgroundsSass: (
+  background-on: rgb(230, 230, 230),
+  background-main: rgb(36, 36, 36),
+  background-sidenav: rgb(36, 36, 36),
+  background-sidenav-on: rgb(230, 230, 230),
+  background-topnav: rgb(58, 63, 68),
+  background-topnav-on: rgb(230, 230, 230),
+  background-ribbon: rgb(91, 96, 103),
+  background-ribbon-variant: rgb(79, 86, 98),
+  background-ribbon-on: rgb(255, 255, 255),
+  background-variant: rgb(100, 100, 100),
+  background: rgb(36, 36, 36),
+);
+
+@function getNestedValue($key, $value, $obj: $themes) {
+  @return map-get(map-get($obj, $key), $value);
+}
+
+@function getVariableValue($key, $value) {
+  @return map-get($key, $value);
+}
+
+
+@function getThemeColor($key, $value) {
+  @return map-get(map-get($themes, $key), $value);
+}
+
+@function getColor($key, $value) {
+  @return map-get($key, $value);
+}
+
+// return the color of a valid form control (color of success)
+@function getFormControlValidColor() {
+  @return getThemeColor(success, base);
+}
+
+// return the color of an invalid form contorl (color of danger)
+@function getFormControlInvalidColor() {
+  @return getThemeColor(danger, base);
+}
+
+@mixin theming($context: null) {
+  @each $key, $value in $themes {
+      &.theme-#{$key} {
+        & #{$context} {
+          background-color: map-get($value, 'base');
+          color: map-get($value, 'on');
+        }
+      }
+  }
+}
+
+@mixin themingHover($context: null) {
+  @each $key, $value in $themes {
+      &.theme-#{$key} {
+        & #{$context} {
+          background-color: map-get($value, 'base');
+          color: map-get($value, 'on');
+        }
+      }
+      &.theme-#{$key} {
+        & #{$context}:hover {
+          background-color: map-get($value, 'variant');
+        }
+      }
+  }
+}
+
+@mixin disabled() {
+  opacity: 0.3;
+}
+
+/**
+  * defaults for inputs
+  * - autocomplete, input, select, nlp search
+  */
+@mixin inputDefaults {
+  outline-style: none;
+  outline-offset: -2px;
+  border-color: var(--component-border);
+  &:hover, &:focus {
+    border-color: var(--component-on); // when I hover the component border = text
+  }
+  color: var(--component-on);
+  background: var(--component-background);
+
+}
+
+@mixin componentDisabled {
+  &:disabled, &:disabled:hover, &:disabled:focus, &.disabled, &.disabled:hover, &.disabled:focus {
+    border-color: var(--component-border);
+    cursor: not-allowed;
+    @include disabled();
+  }
+}
+
+@mixin componentValidation {
+  &.valid {
+    border-color: getFormControlValidColor();
+  }
+  &.invalid:not(:disabled) {
+    border-color: getFormControlInvalidColor();
+  }
+}
+
+// gets rid of that pesky bootstrap class that give everything and your mother
+// a blue glow outline
+@mixin noFocus {
+  outline: none;
+  &:focus, &:hover {
+    outline: none;
+  }
+}
+
+// checkbox + radio
+@mixin svgRadioCheckbox($context: null) {
+  svg {
+    fill: var(--component-border);
+  }
+
+  div.label-container>label.label-text {
+    color: var(--component-border);
+  }
+
+  >input[type=#{$context}]:not(:disabled) {
+    +div.label-container>label {
+      >svg {
+        &.invalid {
+          fill: getFormControlInvalidColor();
+        }
+        &.valid {
+          fill: getFormControlValidColor();
+        }
+      }
+    }
+  }
+
+  &:hover {
+    >input[type=#{$context}]:not(:disabled) {
+      +div.label-container>label {
+        >svg {
+          fill: var(--component-on);
+          &.invalid {
+            fill: getFormControlInvalidColor();
+          }
+          &.valid {
+            fill: getFormControlValidColor();
+          }  
+        }
+
+        &.label-text {
+          color: var(--component-on);
+        }
+      }
+    }
+
+  }
+
+  >input[type=#{$context}] {
+    display: none;
+
+    &+div.label-container {
+      &.with-label {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+      }
+
+      >label {
+        display: inline-block;
+        padding: 0;
+        cursor: pointer;
+
+        >svg {
+          width: 24px;
+        }
+
+        &.label-text {
+          margin-left: 5px;
+        }
+      }
+    }
+  }
+
+  >input[type=#{$context}]:disabled {
+    +div.label-container {
+      @include disabled();
+
+      >label {
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  & label {
+    margin-bottom: 0px;
+  }
+
+  @include componentPulseInOut();
+}
+
+// transitions for checkbox + radio
+@mixin componentPulseInOut {
+  svg.checked {
+    animation: 0.5s pulse-in;
+  }
+  svg.unchecked  {
+    animation: 0.5s pulse-out;
+  }  
+  @keyframes pulse-in {
+    from {
+      opacity: 0;
+      transform: scale(1.3);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  @keyframes pulse-out {
+    from {
+      opacity: 0;
+      transform: scale(1.3);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
+
+
+// default
+@mixin stratacache-dark {
+  
+  :root {
+    --primary-base: rgb(37, 61, 153);
+    --primary-variant: rgb(30, 49, 123);
+    --primary-on: rgb(255,255,255);
+
+    --secondary-base: rgb(59, 97, 243);
+    --secondary-variant: rgb(50, 82, 211);
+    --secondary-on: rgb(255,255,255);
+
+    --highlight-base: rgb(243, 234, 46);
+    --highlight-variant: rgb(211, 202, 38);
+    --highlight-on: rgb(0, 0, 0);
+    
+    --danger-base: rgb(209, 9, 29);
+    --danger-variant: rgba(209, 9, 29, 0.89);
+    --danger-on: rgb(255, 255, 255);
+
+    --warning-base: rgb(255, 159, 69);
+    --warning-variant: rgb(255, 126, 4);
+    --warning-on: rgb(255,255,255);
+
+    --success-base: rgb(111, 192, 27);
+    --success-variant: rgb(89, 154, 22);
+    --success-on: rgb(255, 255, 255);
+
+    --info-base: rgb(141, 206, 215);
+    --info-variant: rgb(88, 183, 197);
+    --info-on: rgb(0, 0, 0);
+
+    // background 
+    --background-on: rgb(230, 230, 230);
+    --background: rgb(36, 36, 36);
+    --background-main: rgb(39, 43, 48);
+    --background-sidenav: rgb(36, 36, 36);
+    --background-sidenav-on: rgb(230, 230, 230);
+    --background-topnav: rgb(58, 63, 68);
+    --background-topnav-on: rgb(230, 230, 230);
+    --background-ribbon: rgb(91, 96, 103);
+    --background-ribbon-variant: rgb(79, 86, 98);
+    --background-ribbon-on: rgb(255, 255, 255);
+    --background-variant: rgb(100, 100, 100);
+    --background-50: rgb(54, 54, 54);
+    --background-50-on: #FFF;
+    --background-100: rgb(50, 50, 50);
+    --background-100-on: #FFF;
+    --background-200: rgb(47, 47, 47);
+    --background-200-on: #FFF;
+    --background-300: rgb(43, 43, 43);
+    --background-300-on: #FFF;
+    --background-400: rgb(40, 40, 40);
+    --background-400-on: #FFF;
+    --background-500: rgb(36, 36, 36);
+    --background-500-on: #FFF;
+    --background-600: rgb(32, 32, 32);
+    --background-600-on: #FFF;
+    --background-700: rgb(25, 25, 25);
+    --background-700-on: #FFF;
+    --background-800: rgb(18, 18, 18);
+    --background-800-on: #FFF;
+    --background-900: rgb(14, 14, 14);
+    --background-900-on: #FFF;
+
+    // deprecated
+    --disabled: rgb(170, 170, 170);
+    --grey-base: rgb(136, 136, 136);
+    --grey-variant: rgb(36, 36, 36);
+    --grey-on: rgb(255, 255, 255);
+
+    // component api
+    --component-background: rgb(47, 51, 56);
+    --component-border: rgb(136, 136, 136);
+    --component-on: rgb(230, 230, 230);
+
+    // selection
+    --component-selection-surface: rgb(100, 100, 100); // base color of the selection dropdown
+    --component-selection-surface-alt: rgb(91, 96, 103); // alt color used when hovering selection items
+    --component-selection-surface-variant: rgb(79, 86, 98); // variant used to indicate a selected item
+    --component-selection-surface-on: rgb(230,230,230); // base text color on an option
+    --component-selection-surface-alt-on: rgb(255,255,255); // text color for an option when hovered or selected
+    
+  }
+
+}
+
+// modern
+@mixin modern-muted {
+  
+  :root {
+    --primary-base: rgb(169, 183, 192);
+    --primary-variant: rgb(127, 148, 162);
+    --primary-on: rgb(0,0,0);
+
+    --secondary-base: rgb(199, 216, 198);
+    --secondary-variant: rgb(151, 182, 149);
+    --secondary-on: rgb(0,0,0);
+
+    --highlight-base: rgb(239, 217, 193);
+    --highlight-variant: rgb(221, 175, 124);
+    --highlight-on: rgb(0, 0, 0);
+
+    --danger-base: rgb(209, 9, 29);
+    --danger-variant: rgba(209, 9, 29, 0.89);
+    --danger-on: rgb(255, 255, 255);
+
+    --warning-base: rgb(255, 159, 69);
+    --warning-variant: rgb(255, 126, 4);
+    --warning-on: rgb(255,255,255);
+
+    --success-base: rgb(89, 154, 22);
+    --success-variant: rgba(89, 154, 22, .89);
+    --success-on: rgb(255, 255, 255);
+
+    --info-base: rgb(141, 206, 215);
+    --info-variant: rgb(88, 183, 197);
+    --info-on: rgb(0, 0, 0);
+
+    // background
+    --background-on: rgb(0, 0, 0);
+    --background-main: rgb(234, 234, 234);
+    --background-sidenav: rgb(36, 36, 36);
+    --background-sidenav-on: rgb(230, 230, 230);
+    --background-topnav: rgb(234, 234, 234);
+    --background-topnav-on: rgb(0, 0, 0);
+    --background-ribbon: rgb(239, 217, 193);
+    --background-ribbon-variant: rgb(221, 175, 124);
+    --background-ribbon-on: rgb(0, 0, 0);
+    --background-variant: rgb(239, 239, 239);
+    --background: rgb(234, 234, 234);
+    --background-50: rgb(244, 244, 244);
+    --background-50-on: #000;
+    --background-100: rgb(242, 242, 242);
+    --background-100-on: #000;
+    --background-200: rgb(240, 240, 240);
+    --background-200-on: #000;
+    --background-300: rgb(238, 238, 238);
+    --background-300-on: #000;
+    --background-400: rgb(236, 236, 236);
+    --background-400-on: #000;
+    --background-500: rgb(234, 234, 234);
+    --background-500-on: #000;
+    --background-600: rgb(224, 224, 224);
+    --background-600-on: #000;
+    --background-700: rgb(214, 214, 214);
+    --background-700-on: #000;
+    --background-800: rgb(204, 204, 204);
+    --background-800-on: #000;
+    --background-900: rgb(194, 194, 194);
+    --background-900-on: #000;
+
+    // deprecated
+    --disabled: rgb(170, 170, 170);
+    --grey-base: rgb(136, 136, 136);
+    --grey-variant: rgb(103, 103, 103);
+    --grey-on: rgb(0, 0, 0);
+
+    // component api
+    --component-background: rgb(232, 240, 254);
+    --component-border: rgb(97, 92, 92);
+    --component-on: rgb(0, 0, 0);
+
+    // selection
+    --component-selection-surface: rgb(239, 217, 193); // base color of the selection dropdown
+    --component-selection-surface-alt:rgb(243, 194, 138); // alt color used when hovering selection items
+    --component-selection-surface-variant: rgb(221, 175, 124); // variant used to indicate a selected item
+    --component-selection-surface-on: rgb(30,30,30); // base text color on an option
+    --component-selection-surface-alt-on: rgb(0,0,0); // text color for an option when hovered or selected
+
+  }
+
+}
+
+// slate DMB
+@mixin slate {
+  
+  :root {
+    --primary-base: #3A3F44;
+    --primary-variant: #34383c;
+    --primary-on: rgb(255,255,255);
+
+    --secondary-base: #7A8288;
+    --secondary-variant: #686f74 ;
+    --secondary-on: rgb(255,255,255);
+
+    --highlight-base: #272b30;
+    --highlight-variant: #272b30;
+    --highlight-on: rgb(255,255,255);
+
+    --danger-base: #ee5f5b; // should be darker
+    --danger-variant: #e9322d;
+    --danger-on: rgb(255, 255, 255);
+
+    --warning-base: #f89406;
+    --warning-variant: #c67605;
+    --warning-on: rgb(255,255,255);
+
+    --success-base: #62c462;
+    --success-variant: #42b142;
+    --success-on: rgb(255, 255, 255);
+
+    --info-base: #5bc0de;
+    --info-variant: #31b0d5;
+    --info-on: rgb(255, 255, 255);
+
+    // background
+    --background-on: rgb(200, 200, 200);
+    --background-main: #272b30;
+    --background-sidenav: #32383e;
+    --background-sidenav-on: rgb(230, 230, 230);
+    --background-topnav: #242424;
+    --background-topnav-on: rgb(255,255,255);
+    --background-ribbon: #272b30;
+    --background-ribbon-variant: #272b30;
+    --background-ribbon-on: rgb(255, 255, 255);
+    --background-variant: #151515;
+    --background: #272b30;
+    --background-50: rgb(54, 54, 54);
+    --background-50-on: #FFF;
+    --background-100: rgb(50, 50, 50);
+    --background-100-on: #FFF;
+    --background-200: rgb(47, 47, 47);
+    --background-200-on: #FFF;
+    --background-300: rgb(43, 43, 43);
+    --background-300-on: #FFF;
+    --background-400: rgb(40, 40, 40);
+    --background-400-on: #FFF;
+    --background-500: rgb(36, 36, 36);
+    --background-500-on: #FFF;
+    --background-600: rgb(32, 32, 32);
+    --background-600-on: #FFF;
+    --background-700: rgb(25, 25, 25);
+    --background-700-on: #FFF;
+    --background-800: rgb(18, 18, 18);
+    --background-800-on: #FFF;
+    --background-900: rgb(14, 14, 14);
+    --background-900-on: #FFF;
+    
+    // deprecated
+    --disabled: rgb(170, 170, 170);
+    --grey-base: rgb(136, 136, 136);
+    --grey-variant: rgb(103, 103, 103);
+    --grey-on: rgb(255, 255, 255);
+
+    // component api
+    --component-background: rgb(47, 51, 56);
+    --component-border: rgb(136, 136, 136);
+    --component-on: rgb(230, 230, 230);
+
+    // selection
+    --component-selection-surface: #272b30; // base color of the selection dropdown
+    --component-selection-surface-alt: #1b1e21; // alt color used when hovering selection items
+    --component-selection-surface-variant: #0f1113; // variant used to indicate a selected item
+    --component-selection-surface-on: rgb(230,230,230); // base text color on an option
+    --component-selection-surface-alt-on: rgb(255,255,255); // text color for an option when hovered or selected
+ 
+  }
+
+}
+
