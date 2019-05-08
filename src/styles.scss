@@ -3,6 +3,7 @@
 
 // the theme from our app ( temporary import )
 @import 'themes';
+@include stratacache-dark();
 
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
@@ -11,9 +12,9 @@
 @include mat-core();
 
 
-// redefine the background for a dark palette
+// redefine some material elements
+// we need tests on these so we dont have breaking changes
 // defined in @angular/material
-// TODO wire up the theme
 $mat-dark-theme-background: (
   
   // 
@@ -33,6 +34,24 @@ $mat-dark-theme-background: (
   disabled-button-toggle: black,
   unselected-chip: map_get($mat-grey, 700),
   disabled-list-option: black,
+);
+
+$mat-dark-theme-foreground: (
+  base:              hotpink, //map_get($backgrounds, background-on),
+  divider:           $light-dividers,
+  dividers:          $light-dividers,
+  disabled:          $light-disabled-text,
+  disabled-button:   rgba(white, 0.3),
+  disabled-text:     $light-disabled-text,
+  elevation:         black,
+  hint-text:         map_get($backgrounds, background-on),
+  secondary-text:    map_get($backgrounds, background-on),
+  icon:              map_get($backgrounds, background-on),
+  icons:             map_get($backgrounds, background-on),
+  text:              map_get($backgrounds, background-on),
+  slider-min:        map_get($backgrounds, background-on),
+  slider-off:        rgba(white, 0.3),
+  slider-off-active: rgba(white, 0.3),
 );
 
 // wire up the css from a them
