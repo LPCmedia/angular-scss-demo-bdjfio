@@ -24,7 +24,6 @@ $mat-dark-theme-background: (
   background: map_get($backgrounds, background-main),
   // TODO adjust theme api to have a variant for hover
   hover:      var(--component-selection-surface-variant),
-  
   card:       map_get($mat-grey, 800),
   dialog:     map_get($mat-grey, 800),
   disabled-button: rgba(white, 0.12),
@@ -39,6 +38,9 @@ $mat-dark-theme-background: (
 
 // TODO map-extend what we need
 // https://getbaseweb.com/blog/2017/03/07/overriding-variable-maps-with-sass/
+// TODO discuss how to wire up the palette to the vars. since all foregrounds are white.
+// should the base vary
+
 $mat-dark-theme-foreground: (
   base:              map_get($backgrounds, background-on),
   divider:           map_get($backgrounds, background-on),
@@ -108,7 +110,8 @@ $custom-theme: mat-dark-theme($custom-theme-primary, $custom-theme-accent, $cust
 // shows that the vars rule not material
 $custom-theme: mat-light-theme($custom-theme-primary, $custom-theme-accent, $custom-theme-warn);
 
-// 
-@include mat-datepicker-theme($custom-theme);
 // TODO remove this and use mixins for components that we use only
 @include angular-material-theme($custom-theme);
+
+// this goes in the components scss
+@include mat-datepicker-theme($custom-theme);
