@@ -1,6 +1,8 @@
 @import '../styles.scss';
 
 :host {
+  // TODO apply in a base mixin
   background-color: var(--component-background);
   display: block;
+  color: var(--component-on);
 }
