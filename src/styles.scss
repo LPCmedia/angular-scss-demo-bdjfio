@@ -21,7 +21,7 @@ $mat-dark-theme-background: (
 
   // this comes from out light themes
   app-bar:    map_get($backgrounds, background-topnav),
-  background: hotpink,
+  background: map_get($backgrounds, background-main),
   hover:      hotpink, //rgba(white, 0.02), // TODO(kara): check style with Material Design UX
   card:       map_get($mat-grey, 800),
   dialog:     map_get($mat-grey, 800),
@@ -57,9 +57,9 @@ $avn-mat-theme-primary: (
     200: $dark-primary-text,
     300: $dark-primary-text,
     400: $dark-primary-text,
-    500: $light-primary-text,
-    600: $light-primary-text,
-    700: $light-primary-text,
+    500: hotpink,
+    600: hotpink,
+    700: hotpink,
     800: $light-primary-text,
     900: $light-primary-text,
     A100: $dark-primary-text,
@@ -71,8 +71,8 @@ $avn-mat-theme-primary: (
 
 
 
-$custom-theme-primary: mat-palette($mat-red);
-$custom-theme-accent: mat-palette($mat-red, A200, A100, A400);
+$custom-theme-primary: mat-palette($avn-mat-theme-primary);
+$custom-theme-accent: mat-palette($avn-mat-theme-primary);
 $custom-theme-warn: mat-palette($mat-red);
 
 $custom-theme: mat-dark-theme($custom-theme-primary, $custom-theme-accent, $custom-theme-warn);
