@@ -25,8 +25,8 @@ $mat-dark-theme-background: (
   background: var(--component-background),
   // TODO adjust theme api to have a variant for hover
   hover:      var(--component-selection-surface-variant), // or hightlight ? or what ?
-  card:       var(--component-background, hotpink), //
-  dialog:     var(--component-background, hotpink),
+  card:       var(--component-backgroun),
+  dialog:     var(--component-background),
   disabled-button: rgba(white, 0.12),
   raised-button: map-get($mat-grey, 800),
   focused-button: $light-focused,
