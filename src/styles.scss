@@ -50,11 +50,11 @@ $mat-dark-theme-foreground: (
   disabled-button:   map_get($backgrounds, background-on),
   disabled-text:     map_get($backgrounds, background-on),
   elevation:         map_get($backgrounds, background-on),
-  hint-text:         map_get($backgrounds, background-on),
-  secondary-text:    map_get($backgrounds, background-on), 
-  icon:              map_get($backgrounds, background-on),
+  hint-text:         var(--component-on),
+  secondary-text:    var(--component-on),
+  icon:              var(--component-on),
   icons:             map_get($backgrounds, background-on),
-  text:              map_get($backgrounds, background-on),
+  text:              var(--component-on),
   slider-min:        map_get($backgrounds, background-on),
   slider-off:        map_get($backgrounds, background-on),
   slider-off-active: map_get($backgrounds, background-on),
@@ -115,7 +115,7 @@ $custom-theme: mat-light-theme($custom-theme-primary, $custom-theme-accent, $cus
 
 // this goes in the components scss
 
+@include angular-material-theme($custom-theme);
 @include mat-datepicker-theme($custom-theme);
 @include mat-core-theme($custom-theme);
-@include angular-material-theme($custom-theme);
 @include mat-button-theme($custom-theme);
