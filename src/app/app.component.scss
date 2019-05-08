@@ -1,6 +1,10 @@
 @import '../styles.scss';
+@include mat-datepicker-theme($custom-theme);
+@include mat-button-theme($custom-theme);
+@include mat-icon-theme($custom-theme);
 
 :host {
+
   // TODO apply in a base mixin
   background-color: var(--component-background);
   display: block;
