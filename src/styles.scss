@@ -23,7 +23,7 @@ $mat-dark-theme-background: (
   app-bar:    map_get($backgrounds, background-topnav),
   background: map_get($backgrounds, background-main),
   // TODO adjust theme api to have a variant for hover
-  hover:      var(--component-selection-surface-variant),
+  hover:      var(--component-selection-surface-variant), // or hightlight ? or what ?
   card:       map_get($mat-grey, 800),
   dialog:     map_get($mat-grey, 800),
   disabled-button: rgba(white, 0.12),
@@ -50,7 +50,7 @@ $mat-dark-theme-foreground: (
   disabled-text:     map_get($backgrounds, background-on),
   elevation:         map_get($backgrounds, background-on),
   hint-text:         map_get($backgrounds, background-on),
-  secondary-text:    map_get($backgrounds, background-on),
+  secondary-text:    map_get($backgrounds, background-on), 
   icon:              map_get($backgrounds, background-on),
   icons:             map_get($backgrounds, background-on),
   text:              map_get($backgrounds, background-on),
@@ -65,7 +65,7 @@ $mat-dark-theme-foreground: (
 $mat-light-theme-foreground: $mat-dark-theme-foreground;
 $mat-light-theme-background: $mat-dark-theme-background;
 
-// TODO wire up primary and "warn"
+// TODO wire up primary, secondary and "warn"
 $avn-mat-theme-primary: (
   50: #ffebee,
   100: #ffcdd2,
